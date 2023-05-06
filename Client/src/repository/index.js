@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const appAPI = axios.create({
-  baseURL: 'https://localhost:4000/api/',
+  baseURL: 'http://localhost:4000/',
   timeout: 5000,
   headers: { 'Authentication': 'Bearer' }
 });

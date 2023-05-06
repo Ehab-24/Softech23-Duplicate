@@ -61,9 +61,9 @@ export default function CustomersPage() {
               <Spinner />
             </div>
           ) : (
-            <div className="w-full">
+            customers? <div className="w-full">
               <CustomerList customers={customers} />
-            </div>
+            </div> : <p>Coudl not load customers</p>
           )}
         </div>
       </ErrorBoundary>

@@ -1,6 +1,6 @@
 import { appAPI } from '.';
 
-export async function getOrderById(id = '') {
+export async function getOrderById(id) {
   try {
     const response = await appAPI.get(`/order/${id}`);
     return response.data;
@@ -10,10 +10,10 @@ export async function getOrderById(id = '') {
 }
 
 export async function getOrders(
-  customerName,
-  customerEmail,
-  itemName,
-  createdAt,
+  customerName = '',
+  customerEmail = '',
+  itemName = '',
+  createdAt = null,
   limit = 20,
   page = 1
 ) {
@@ -21,7 +21,7 @@ export async function getOrders(
     const response = await appAPI.get('/order', {
       params: { customerName, customerEmail, itemName, createdAt, limit, page }
     });
-    return response.data;
+    return response.data.orders;
   } catch (error) {
     return null;
   }

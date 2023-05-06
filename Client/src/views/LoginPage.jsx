@@ -1,14 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function LoginPage() {
+  function handleSubmit(event) {
+    event.preventDefault();
 
-    function handleSubmit(event) {
-        event.preventDefault();
-
-        const {email, password} = event.target.elements;
-        console.log(email.value, password.value);
-    }
-
+    const { email, password } = event.target.elements;
+    console.log(email.value, password.value);
+  }
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -18,7 +16,11 @@ export default function LoginPage() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
-            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" action="#">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-4 md:space-y-6"
+              action="#"
+            >
               <div>
                 <label
                   htmlFor="email"

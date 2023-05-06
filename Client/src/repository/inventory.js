@@ -24,7 +24,7 @@ export async function getInventoryItemById(id) {
 
 export async function createInventoryItem(item) {
     try {
-        const response = await appAPI.post('/inventory', [item]);
+        const response = await appAPI.post('/item', item);
         return response;
     }
     catch(error) {

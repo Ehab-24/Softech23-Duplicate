@@ -29,6 +29,11 @@ export default function Header() {
                 to={"/order"}
                 className="sm:flex hidden relative flex-col items-center"
               >
+                {cart?.length > 0 && 
+                  <h2 className="text-white font-bold absolute bottom-3 right-0">
+                    {cart.length}
+                  </h2>
+                }
                 <BsCartFill size={30} className="text-pink-500" />
               </Link>
             ) : (

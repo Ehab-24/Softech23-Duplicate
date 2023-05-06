@@ -47,7 +47,7 @@ const ItemPage = () => {
     if (item.stock === 0) {
       toast.error("Out of stock");
     }
-    else if (!user === null) {
+    else if (user === null) {
       setOpen(true);
     }
     else {

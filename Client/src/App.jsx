@@ -1,23 +1,5 @@
-import React from 'react'
-import Test from './pages/Test'
-import {useRoutes} from 'react-router-dom'
-import Layout from './Layout'
-import Ai from './pages/Ai'
+import Router from './components/Router';
 
-const App = () => {
-
-  const routes = useRoutes([
-    {
-      path: '/',
-      element: <Layout />,
-      children: [
-        { path: '/', element: <Test /> },
-        { path: '/ai', element: <Ai /> }
-      ]
-    }
-  ])
-
-  return routes;
-}
-
-export default App
+export default function App () {
+  return <Router></Router>;
+};

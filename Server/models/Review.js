@@ -8,4 +8,4 @@ const ReviewSchema = new Schema({
     customer_id: { type: Schema.Types.ObjectId, ref: 'Customer', required: true },
 });
 
-const Review = mongoose.model('Review', ReviewSchema);
+export const Review = mongoose.model('Review', ReviewSchema);

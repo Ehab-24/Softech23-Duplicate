@@ -11,6 +11,8 @@ import "./passport.js"
 
 import inventoryRoutes from "./routes/inventoryRoutes.js";
 import itemRoutes from "./routes/itemRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
 
 dotenv.config();
 
@@ -83,6 +85,8 @@ app.listen(process.env.PORT || 4000, () => {
 //Routes
 app.use("/inventory", inventoryRoutes);
 app.use("/item", itemRoutes);
+app.use("/order", orderRoutes);
+app.use("/review", reviewRoutes);
 
 //Server routes
 

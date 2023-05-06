@@ -18,3 +18,19 @@ export const addInventory = async (req, res) => {
         });
     }
 }
+
+// Getting all inventory
+
+export const getAllInventory = async (req, res) => {
+    try {
+        const inventory = await Inventory.find();
+        res.json({
+            inventory
+        });
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err.message
+        });
+    }
+}

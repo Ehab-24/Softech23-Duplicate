@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {RiSearchFill} from "react-icons/ri"
+import axios from 'axios';
 
 const SearchBar = () => {
   const [input, setInput] = useState('');
-  const navigate = useNavigate()
+  const [search, setSearch] = useState([]);
+  const navigate = useNavigate();
 
+  const handleSearch = async (input) => {
+    setTimeout(async () => {
+      const response = await axios.get(`https://localhost:4000/item/title/${input}`);
+      setSearch(response.data.results);
+    }, 500);
+  };
+  
   const handleClick = (e) => {
     e.preventDefault();
     if(!input){

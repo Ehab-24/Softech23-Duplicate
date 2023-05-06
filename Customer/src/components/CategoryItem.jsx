@@ -2,17 +2,17 @@ import React from 'react'
 import {useNavigate}from 'react-router-dom'
 
 const CategoryItem = ({item}) => {
-    
+  
     const navigate = useNavigate()
     const handleWishlist = (adId) => {}
-
+    const description = item.item_description.length > 50 ? item.item_description.substring(0, 30) + "..." : item.item_description;
   return (
-    <div className="cursor-pointer w-56" onClick={() => { navigate(`item/${item.id}`) }} key={item.id}>
+    <div className="cursor-pointer w-52" onClick={() => { navigate(`item/${item._id}`) }} key={item._id}>
     <div className="bg-white mb-2 rounded-2xl flex relative">
       <img
           style={{ minHeight: "285px" }}
           className="rounded-2xl object-cover aspect-square"
-          src={`${item.image}`}
+          src={`${item.item_images[0]}`}
           alt=""
         />
       <div className="absolute top-3 right-3" onClick={(e) => { e.stopPropagation(); handleWishlist(item.id) }}>
@@ -20,10 +20,10 @@ const CategoryItem = ({item}) => {
         </div>
       </div>
     </div>
-    <h2 className="font-bold text-white">{item.title}</h2>
-    <h3 className="text-sm text-gray-300">{item.description}</h3>
+    <h2 className="font-bold text-white">{item.item_title}</h2>
+    <h3 className="text-sm text-gray-300">{description}</h3>
     <div className="mt-1">
-      <span className="font-bold text-pink-500">PKR {item.price}</span>
+      <span className="font-bold text-pink-500">PKR {item.item_price}</span>
     </div>
   </div>
   )

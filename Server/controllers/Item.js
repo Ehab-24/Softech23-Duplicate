@@ -4,9 +4,8 @@ import Item from "../models/Item.js";
 
 export const addItem = async (req, res) => {
     try {
-        console.log(req.body)
-        const { item_title, item_description, item_price, item_cost, item_quantity, inventory_type, item_images, mininmum_age } = req.body;
-        const item = await Item.create({ item_title, item_description, item_price, item_cost, item_quantity, inventory_type, item_images, mininmum_age });
+        const { item_title, item_description, item_price, item_cost, item_quantity, inventory_type, item_images, minimum_age } = req.body;
+        const item = await Item.create({ item_title, item_description, item_price, item_cost, item_quantity, inventory_type, item_images, minimum_age });
         res.status(201).json({
             item
         });
@@ -38,7 +37,6 @@ export const deleteItem = async (req, res) => {
 //Getting item by id
 
 export const getItemById = async (req, res) => {
-    console.log("reached")
         try {
             const { id } = req.params;
             const item = await Item.findById(id);
@@ -74,8 +72,8 @@ export const getAllItems = async (req, res) => {
 
 export const updateItem = async (req, res) => {
     try {
-        const { id, item_title, item_description, item_price, item_cost, item_quantity, invetory_type, item_images, mininmum_age } = req.body;
-        const item = await Item.findByIdAndUpdate(id, { item_title, item_description, item_price, item_cost, item_quantity, item_images, mininmum_age });
+        const { id, item_title, item_description, item_price, item_cost, item_quantity, inventory_type, item_images, minimum_age } = req.body;
+        const item = await Item.findByIdAndUpdate(id, { item_title, item_description, item_price, item_cost, item_quantity, item_images, inventory_type, minimum_age });
         res.json({
             item
         });
@@ -91,7 +89,8 @@ export const updateItem = async (req, res) => {
 
 export const getItemByInventoryType = async (req, res) => {
     try {
-        const { inventory_type } = req.body;
+        let { inventory_type } = req.body;
+        console.log(inventory_type);
         const item = await Item.find({ inventory_type });
         res.json({
             item
@@ -103,3 +102,20 @@ export const getItemByInventoryType = async (req, res) => {
         });
     }
 };
+
+// Getting item by title
+
+export const getItemByTitle = async (req, res) => {
+    try {
+        const { item_title } = req.body;
+        const item = await Item.find({ item_title });
+        res.json({
+            item
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: 'fail',
+            message: error.message
+        });
+    }
+}

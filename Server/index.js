@@ -13,6 +13,7 @@ import inventoryRoutes from "./routes/inventoryRoutes.js";
 import itemRoutes from "./routes/itemRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
+import authRoutes from "./routes/authRoutes.js"; 
 
 dotenv.config();
 
@@ -87,6 +88,7 @@ app.use("/inventory", inventoryRoutes);
 app.use("/item", itemRoutes);
 app.use("/order", orderRoutes);
 app.use("/review", reviewRoutes);
+app.use("/auth", authRoutes);
 
 //Server routes
 

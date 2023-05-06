@@ -9,7 +9,7 @@ const ItemSchema = new Schema({
     item_quantity: { type: Number, required: true },
     item_images: [{ type: String }],
     inventory_type: { type: String, required: true },
-    mininmum_age: { type: Number, required: true }
+    minimum_age: { type: Number, required: true }
 });
 
 const Item = mongoose.model("Item", ItemSchema);

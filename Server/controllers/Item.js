@@ -4,6 +4,7 @@ import Item from "../models/Item.js";
 
 export const addItem = async (req, res) => {
     try {
+        console.log(req.body)
         const { item_title, item_description, item_price, item_cost, item_quantity, inventory_type, item_images, mininmum_age } = req.body;
         const item = await Item.create({ item_title, item_description, item_price, item_cost, item_quantity, inventory_type, item_images, mininmum_age });
         res.status(201).json({

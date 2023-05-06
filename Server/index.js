@@ -3,14 +3,11 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import gptRoutes from "./routes/gptRoutes.js";
-import authRoutes from "./routes/authRoutes.js"
-import subRoutes from "./routes/subs.js"
-import "./passport.js"
 import passport from "passport";
 import User from "./models/user.js";
 import bodyParser from "body-parser";
 import session from "express-session";
+import "./passport.js"
 
 dotenv.config();
 
@@ -85,7 +82,3 @@ app.listen(process.env.PORT || 4000, () => {
 app.get("/", (req, res) => {
   res.send("Hello from AntsqAI!");
 });
-
-app.use("/gpt", gptRoutes);
-app.use("/auth", authRoutes); 
-app.use("/subs", subRoutes);

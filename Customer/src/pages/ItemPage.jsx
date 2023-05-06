@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { videoGame } from '../consts'
 import axios from 'axios'
 import PlaceGallery from '../components/PlaceGallery/PlaceGallery';
 import useCartStore from '../store/useCart';

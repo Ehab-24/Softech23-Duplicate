@@ -1,21 +1,22 @@
-import { useContext, useState } from "react";
-// import { UserContext } from "../UserContext.jsx";
-// import { useLogin } from "../UserContext.jsx";
+import { useEffect, useState } from "react";
 import LoadingButton from "../components/LoadingButton/LoadingButton.jsx";
-import { toast, Toaster } from "react-hot-toast";
+import useAuthStore from "../store/useAuth.js";
 
-export default function Login() {
+export default function Login({setOpen}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const {loginUser, user, token} = useAuthStore();
 
-  const handleLoginSubmit = () => {
-
+  const handleLoginSubmit = async () => {
+    setLoading(true);
+    await loginUser(email, password);
+    setLoading(false);
+    setOpen(false);
   }
 
   return (
     <div>
-      <Toaster />
       <div className="mt-4 flex items-center justify-around rounded">
         <form className="max-w-md mx-auto" onSubmit={handleLoginSubmit}>
           <input

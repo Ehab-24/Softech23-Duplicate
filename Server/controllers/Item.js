@@ -102,3 +102,20 @@ export const getItemByInventoryType = async (req, res) => {
         });
     }
 };
+
+// Getting item by title
+
+export const getItemByTitle = async (req, res) => {
+    try {
+        const { item_title } = req.body;
+        const item = await Item.find({ item_title });
+        res.json({
+            item
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: 'fail',
+            message: error.message
+        });
+    }
+}

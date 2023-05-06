@@ -9,6 +9,9 @@ import bodyParser from "body-parser";
 import session from "express-session";
 import "./passport.js"
 
+import inventoryRoutes from "./routes/inventoryRoutes.js";
+import itemRoutes from "./routes/itemRoutes.js";
+
 dotenv.config();
 
 const app = express();
@@ -77,8 +80,12 @@ app.listen(process.env.PORT || 4000, () => {
   console.log("Server started on port 4000");
 });
 
+//Routes
+app.use("/inventory", inventoryRoutes);
+app.use("/item", itemRoutes);
+
 //Server routes
 
 app.get("/", (req, res) => {
-  res.send("Hello from AntsqAI!");
+  res.send("Hello from pixel palace");
 });

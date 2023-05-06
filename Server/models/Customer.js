@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CustomerSchema = new Schema({
-    customer_name: { type: String, required: true, unique: true },
-    customer_email: { type: String, required: true },
-    customer_dob: { type: Date, required: true },
-    customer_password: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
+    email: { type: String, required: true },
+    dob: { type: Date, required: true },
+    password: { type: String, required: true },
+    wishlist: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
 });
 
 module.exports = mongoose.model('Customer', CustomerSchema);

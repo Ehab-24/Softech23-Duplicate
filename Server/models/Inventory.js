@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const InventorySchema = new Schema({
     name: { type: String, required: true, unique: true },
-    items: [{ type: Schema.Types.ObjectId, ref: 'Item', required: true }],
 });
 
-module.exports = mongoose.model('Inventory', InventorySchema);
+const Inventory = mongoose.model("Inventory", InventorySchema);
+export default Inventory;

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
@@ -8,7 +8,9 @@ const ItemSchema = new Schema({
     item_cost: { type: Number, required: true },
     item_quantity: { type: Number, required: true },
     item_images: [{ type: String }],
+    inventory_type: { type: String, required: true },
     mininmum_age: { type: Number, required: true }
 });
 
-module.exports = mongoose.model('Item', ItemSchema);
+const Item = mongoose.model("Item", ItemSchema);
+export default Item;

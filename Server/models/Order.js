@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
@@ -9,4 +9,5 @@ const OrderSchema = new Schema({
     customer_id: { type: Schema.Types.ObjectId, ref: 'Customer', required: true },
 });
 
-module.exports = mongoose.model('Order', OrderSchema);
+const Order = mongoose.model("Order", OrderSchema);
+export default Order;

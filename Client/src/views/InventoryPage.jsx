@@ -1,27 +1,38 @@
+import { useState, useEffect } from 'react';
 import InventoryItemForm from '../components/InventoryItemForm';
+import { getInventoryItems } from '../repository/inventory';
+import Spinner from '../components/Spinner';
+import InventoryList from '../components/InventoryList';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallback from '../components/ErrorFallback';
 
 export default function Inventory() {
-  function openModal() {
-    console.log('open')
-    document.getElementById('modal').showModal();
-  }
-  function closeModal() {
-    document.getElementById('modal').close();
-  }
+  const [loading, setLoading] = useState(false);
+  const [inventory, setInventory] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+    getInventoryItems().then((response) => {
+      setInventory(response);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <div>
-      {/* <dialog
-        id="modal"
-        className="rounded-lg py-8 px-4 bg-gray-50 dark:bg-gray-900 flex flex-col items-end"
-      >
-        <button className="mr-4 font-bold text-lg" onClick={closeModal}>
-          X
-        </button> */}
-        <InventoryItemForm />
-        {/* </dialog> */}
-      <button onClick={openModal}>Open</button>
       <h1 className="dark:text-gray-300 text-gray-700">Inventory Page</h1>
+      <InventoryItemForm />
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        {loading ? (
+          <div className="mt-40 w-full h-full grid place-items-center">
+            <Spinner />
+          </div>
+        ) : !!inventory ? (
+          <InventoryList inventory={inventory} />
+        ) : (
+          <p>Could not load inventory items</p>
+        )}
+      </ErrorBoundary>
     </div>
   );
 }

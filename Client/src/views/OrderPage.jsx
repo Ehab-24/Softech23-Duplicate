@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Await, useLoaderData } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 
-export default function OrdersPage() {
+export default function OrderPage() {
   const { order } = useLoaderData();
 
   return (

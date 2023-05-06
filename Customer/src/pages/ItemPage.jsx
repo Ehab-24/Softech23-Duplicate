@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { videoGame } from '../consts'
 import axios from 'axios'
 import PlaceGallery from '../components/PlaceGallery/PlaceGallery';
 import useCartStore from '../store/useCart';
@@ -48,7 +47,7 @@ const ItemPage = () => {
     if (item.stock === 0) {
       toast.error("Out of stock");
     }
-    else if (!user === null) {
+    else if (user === null) {
       setOpen(true);
     }
     else {

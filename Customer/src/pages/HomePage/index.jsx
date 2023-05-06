@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import LoginPage from '../LoginPage';
 import {toast, Toaster} from 'react-hot-toast';
 import InventoryList from './InventoryList';
+import useAuthStore from '../../store/useAuth';
 
 const HomePage = () => {
 
@@ -10,7 +11,15 @@ const HomePage = () => {
   }, [])
 
   const [open, setOpen] = useState(false);
-  
+
+  const {getUser, token} = useAuthStore();
+
+  useEffect(()=>{
+    if(token){
+      getUser();
+    }
+  }, [token])
+
   return (
     <div>
         <Toaster />

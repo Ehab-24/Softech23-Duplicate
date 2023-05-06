@@ -23,7 +23,7 @@ export default function LoginPage({ open, setOpen }) {
           <div className={`${loginMode ? "mb-36" : 'mb-24'}`} >
             <h1 className="text-3xl font-semibold text-center text-white mb-7">{loginMode ? 'Login' : 'Sign up'}</h1>
 
-            {loginMode ? (<Login />) : (<Register />)}
+            {loginMode ? (<Login setOpen={setOpen}/>) : (<Register setOpen={setOpen}/>)}
 
             <div className="flex items-center justify-center">
               <hr className="flex-1 border-gray-200 border-1 border-solid my-0 mr-4" />

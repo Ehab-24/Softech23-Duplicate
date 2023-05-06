@@ -18,7 +18,7 @@ export default function Header() {
 
     <div>
       <LoginPage open={open} setOpen={setOpen} />
-      <div className="bg-white py-2 px-4 bg-pink-800 rounded-full bg-opacity-70">
+      <div className="bg-white py-2 px-4 bg-pink-700 rounded-full bg-opacity-70">
         <header className="flex sm:pb-0 pb-3 justify-between items-center gap-3">
           <Link to={"/"} className="md:flex hidden items-center gap-1">
             <RiPixelfedLine size={33} className="text-pink-500" />

@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import {addInventory} from "../controllers/Inventory.js"
+import {addInventory, getAllInventory} from "../controllers/Inventory.js"
 
 //Adding inventory
 router.post("/", addInventory);

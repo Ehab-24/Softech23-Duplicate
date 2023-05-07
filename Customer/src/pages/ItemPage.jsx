@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { videoGame } from '../consts'
 import axios from 'axios'
 import PlaceGallery from '../components/PlaceGallery/PlaceGallery';
 import useCartStore from '../store/useCart';
@@ -9,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/useAuth';
 import { AiFillStar } from "react-icons/ai"
 import { Toaster, toast } from "react-hot-toast";
+import Review from '../components/Review';
+import ReviewItem from '../components/ReviewItem';
 
 const ItemPage = () => {
   const navigate = useNavigate();
@@ -17,10 +18,12 @@ const ItemPage = () => {
   const { id } = useParams();
   const { addToCart } = useCartStore();
   const [open, setOpen] = useState(false);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     toast.dismiss();
     fetchItem();
+    fetchReviews();
   }, [])
 
   const fetchItem = async () => {
@@ -31,6 +34,15 @@ const ItemPage = () => {
       
     }
   }
+
+  const fetchReviews = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/review/item/${id}`, {}, {})
+      setReviews(res.data.reviews);
+    } catch (error) {
+      console.log(error);
+    }
+  } 
 
   const handleAddToCart = () => {
     if (item.stock === 0) {
@@ -48,7 +60,7 @@ const ItemPage = () => {
     if (item.stock === 0) {
       toast.error("Out of stock");
     }
-    else if (!user === null) {
+    else if (user === null) {
       setOpen(true);
     }
     else {
@@ -92,9 +104,23 @@ const ItemPage = () => {
               </button>
             </div>
           </div>
-        </div>}
+        </div>
+        }
+        {
+          reviews.length > 0 && (
+            <div className='mt-8'>
+              <h2 className='text-2xl text-white font-semibold'>Reviews</h2>
+              <div className='flex flex-col gap-4 mt-4 w-80'>
+                {reviews.map((review) => (
+                  <ReviewItem review={review} />
+                ))}
+              </div>
+            </div>
+          )
+        }
+        {item && <Review refresh={fetchReviews} item={item} />}
     </div>
   )
 }
 
-export default ItemPage
+export default ItemPage;

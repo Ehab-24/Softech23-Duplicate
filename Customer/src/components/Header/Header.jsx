@@ -5,20 +5,18 @@ import { useState } from "react";
 import {BsCartFill} from "react-icons/bs"
 import {RiPixelfedLine} from "react-icons/ri"
 import useCartStore from "../../store/useCart.js";
-import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../store/useAuth.js";
+import AccountDrawer from "../AccountDrawer/AccountDrawer.jsx";
 
 export default function Header() {
-
-  const navigate = useNavigate();
   const {cart} = useCartStore();
-
-  const user = null;
+  const {user} = useAuthStore();
   const [open, setOpen] = useState(false);
   return (
 
     <div>
       <LoginPage open={open} setOpen={setOpen} />
-      <div className="bg-white py-2 px-4 bg-pink-700 rounded-full bg-opacity-70">
+      <div className="bg-pink-900 py-2 px-4 rounded-full bg-opacity-70">
         <header className="flex sm:pb-0 pb-3 justify-between items-center gap-3">
           <Link to={"/"} className="md:flex hidden items-center gap-1">
             <RiPixelfedLine size={33} className="text-pink-500" />
@@ -31,7 +29,11 @@ export default function Header() {
                 to={"/order"}
                 className="sm:flex hidden relative flex-col items-center"
               >
-                {notify && <div className="bg-red-500 rounded-full w-3 h-3 absolute right-0"></div>}
+                {cart?.length > 0 && 
+                  <h2 className="text-white font-bold absolute bottom-3 right-0">
+                    {cart.length}
+                  </h2>
+                }
                 <BsCartFill size={30} className="text-pink-500" />
               </Link>
             ) : (
@@ -91,6 +93,5 @@ export default function Header() {
         </header>
       </div>
     </div>
-
   );
 }

@@ -6,8 +6,13 @@ const useCartStore = create((set, get)=>({
         set(state => ({cart: [...state.cart, item]}));
     },
     removeFromCart: (item) => {
-        set(state => ({cart: state.cart.filter(i => i._id !== item._id)}));
-    },
+        const index = get().cart.findIndex(i => i._id === item._id);
+        if (index !== -1) {
+            const newCart = [...get().cart];
+            newCart.splice(index, 1);
+            set({ cart: newCart });
+        }
+    },    
     clearCart: () => {
         set({cart: []});
     },

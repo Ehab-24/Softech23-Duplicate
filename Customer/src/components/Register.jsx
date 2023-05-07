@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Toaster } from "react-hot-toast";
+import useAuthStore from "../store/useAuth";
 import LoadingButton from "./LoadingButton/LoadingButton";
 
-export default function Register() {
+export default function Register({setOpen}) {
+  const {user, signupUser} = useAuthStore();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState('');
@@ -10,11 +12,16 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleRegisterSubmit = () => {}
+  const handleRegisterSubmit = () => {
+      setLoading(true);
+      signupUser(name, email, password, dob, gender);
+      console.log(user);
+      setLoading(false);
+      setOpen(false);
+  }
 
   return (
     <div>
-      <Toaster />
       <div className="my-4 flex items-center justify-around rounded">
         <form className="max-w-md mx-auto" onSubmit={handleRegisterSubmit}>
           <input type="text"

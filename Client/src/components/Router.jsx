@@ -1,4 +1,4 @@
-import { Route, defer } from 'react-router-dom';
+import { Route, defer, redirect } from 'react-router-dom';
 import DefaultLayout from '../layouts/DefaultLayout';
 import AuthLayout from '../layouts/AuthLayout';
 import LoginPage from '../views/LoginPage';
@@ -11,6 +11,7 @@ import { getOrderById } from '../repository/order';
 import { getInventoryItemById } from '../repository/inventory';
 import ItemPage from '../views/ItemPage';
 import ErrorFallback from './ErrorFallback';
+import { useCookies } from 'react-cookie';
 
 const routesJSX = (
   <Route>
@@ -18,10 +19,6 @@ const routesJSX = (
       <Route
         path="orders/:id"
         element={<OrderPage />}
-        loader={({ params }) => {
-          const order = getOrderById(params.id);
-          return defer({ order });
-        }}
         errorElement={<ErrorFallback />}
       />
       <Route path="orders" element={<OrdersPage />} />

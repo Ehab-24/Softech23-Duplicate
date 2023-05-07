@@ -1,14 +1,21 @@
+import { useCookies } from 'react-cookie';
+import { register } from '../repository/auth';
 import { Link } from 'react-router-dom';
 
 export default function RegisterPage() {
+  const [cookie, setCookie, removeCookie] = useCookies(['Authorization']);
 
+  function handleSubmit(event) {
+    event.preventDefault();
 
-    function handleSubmit(event) {
-        event.preventDefault();
-
-        const {email, password, confirmPassword} = event.target.elements;
-        console.log(email.value, password.value, confirmPassword.value);
+    const { email, password, confirmPassword } = event.target.elements;
+    if (password.value !== confirmPassword.value) {
+      alert('Passwords do not match');
     }
+    register(email.value, password.value).then((response) =>
+      setCookie('Authorization', response.token)
+    );
+  }
 
   return (
     <section className="w-full h-full bg-gray-50 dark:bg-gray-900">

@@ -20,6 +20,7 @@ export default function ItemPage() {
             <p>{item.item_quantity}</p>
             <p>{item.item_description}</p>
             <p>{item.minimum_age}</p>
+            <img src={item.item_images[0]} />
           </div>
         )}
       </Await>

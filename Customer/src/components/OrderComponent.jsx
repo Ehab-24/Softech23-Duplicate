@@ -28,7 +28,7 @@ const OrderComponent = () => {
                 navigate("/");
             }
         } catch (error) {
-            
+            console.log(error);
         }
     }
 

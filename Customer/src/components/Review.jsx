@@ -14,6 +14,7 @@ const Review = ({item, refresh}) => {
             toast.error('Please fill all fields');
             return;
         }
+        
         const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/review`, {
             rating,
             review_text: text,

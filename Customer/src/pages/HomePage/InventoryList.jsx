@@ -21,7 +21,7 @@ const InventoryList = ({ type }) => {
     return (
         <div>
             <h2 className='mt-14 text-white text-2xl ml-2 mb-6'>{type}</h2>
-            <div className="flex gap-12 mt-4 flex-wrap">
+            <div className="flex gap-12 mt-4 flex-wrap ">
                 {items.map((item) => (
                     <CategoryItem key={item._id} item={item} />
                 ))}

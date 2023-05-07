@@ -62,6 +62,7 @@ export default function InventoryItemForm(props) {
       item_images: images
     };
     props.item ? updateInventoryItem(item) : createInventoryItem(data);
+    event.target.reset();
   }
   return (
     <form onSubmit={handleSubmit}>

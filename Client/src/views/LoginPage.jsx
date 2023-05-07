@@ -1,15 +1,17 @@
 import { login } from '../repository/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 export default function LoginPage() {
   const [cookie, setCookie, removeCookie] = useCookies(['Authorization']);
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
     const { email, password } = event.target.elements;
     login(email.value, password.value).then((response) => {
       setCookie('Authorization', response.token);
+      navigate('/');
     });
   }
 

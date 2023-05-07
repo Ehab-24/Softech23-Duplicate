@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import OrdersList from '../components/OrdersList';
 import Spinner from '../components/Spinner';
-import { getOrders } from '../repository/order';
+import { getOrderByCustomerName, getOrders, getOrderByCustomerDate, getOrderByCustomerEmail } from '../repository/order';
 import ErrorFallback from '../components/ErrorFallback';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -17,17 +17,21 @@ export default function OrdersPage() {
     });
   }, []);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const { name, itemName, email, date } = event.target.elements;
-
     setLoading(true);
-    getOrders(name.value, itemName.value, email.value, date.value).then(
-      (response) => {
-        setOrders(response);
-        setLoading(false);
-      }
-    );
+    
+    if(name.value) {
+      setOrders(await getOrderByCustomerName(name.value));
+    }
+    else if(email.value) {
+      setOrders(await getOrderByCustomerEmail(email.value));
+    }
+    else if(date.value) {
+      setOrders(await getOrderByCustomerDate(date.value));
+    }
+    setLoading(false);
   }
 
   return (

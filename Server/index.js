@@ -15,6 +15,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import authRoutes from "./routes/authRoutes.js"; 
 import wishlistRoutes from "./routes/wishlistRoutes.js";
+import botRoutes from "./routes/botRoutes.js"
 
 dotenv.config();
 
@@ -91,6 +92,7 @@ app.use("/order", orderRoutes);
 app.use("/review", reviewRoutes);
 app.use("/auth", authRoutes);
 app.use("/wishlist", wishlistRoutes);
+app.use("/bot", botRoutes);
 
 //Server routes
 

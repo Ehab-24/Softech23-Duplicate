@@ -1,6 +1,11 @@
-import { createInventoryItem } from '../repository/inventory';
+import axios from 'axios';
+import { createInventoryItem, updateInventoryItem } from '../repository/inventory';
+import { useState } from 'react';
 
 export default function InventoryItemForm(props) {
+
+  const [images, setImages] = useState([]);
+
   let item = props.item;
   if (!item) {
     item = {
@@ -14,6 +19,17 @@ export default function InventoryItemForm(props) {
     };
   }
 
+  function handleFile(event) {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'fvm5pdkc');
+    formData.append('cloud_name', 'dq1ho1jvc');
+    axios.post('https://api.cloudinary.com/v1_1/dq1ho1jvc/image/upload', formData).then((response) => {
+      setImages([response.data.secure_url]);
+    });
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -25,10 +41,8 @@ export default function InventoryItemForm(props) {
       item_quantity,
       inventory_type,
       minimum_age,
-      item_images
     } = event.target.elements;
 
-    
     const data = {
       item_title: item_title.value,
       item_description: item_description.value,
@@ -37,10 +51,9 @@ export default function InventoryItemForm(props) {
       item_quantity: item_quantity.value,
       inventory_type: inventory_type.value,
       minimum_age: minimum_age.value,
-      item_images: item_images.value
+      item_images: images
     };
-    console.log(data)
-    createInventoryItem(data);
+    props.item ? updateInventoryItem(item): createInventoryItem(data);
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -118,6 +131,7 @@ export default function InventoryItemForm(props) {
           id="item_images"
           type="file"
           accept="image/jpeg image/png image/jpg"
+          onChange={handleFile}
           multiple
         />
       </label>

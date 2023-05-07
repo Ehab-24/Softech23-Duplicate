@@ -57,6 +57,35 @@ const useAuthStore = create((set, get) => ({
         Cookies.remove('token'); // remove token from cookie
         set({ user: null, token: null })
     },
+
+    //wishlist
+    addToWishlist: async (item) => {
+        try {
+            let token = get().token;
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URI}/wishlist`, {
+                item_id: item._id,
+                token
+            }, {});
+            const { customer } = response.data;
+            set({ user: { ...get().user, wishlist: customer.wishlist } });
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    removeFromWishlist: async (item) => {
+        try {
+            let token = get().token;
+            const response = await axios.delete(`${import.meta.env.VITE_BASE_URI}/wishlist/${item._id}`, {
+                token
+            }, {});
+            const { customer } = response.data;
+            set({ user: { ...get().user, wishlist: customer.wishlist } });
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
 }));
 
 export default useAuthStore;

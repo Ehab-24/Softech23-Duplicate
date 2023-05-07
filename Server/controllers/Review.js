@@ -4,7 +4,8 @@ import {Review} from "../models/Review.js"
 
 export const addReview = async (req, res) => {
     try {
-        const { review_text, rating, item_id, customer_id } = req.body;
+        const { review_text, rating, item_id } = req.body;
+        const customer_id = req.user.customer_id;
         const review = await Review.create({ review_text, rating, item_id, customer_id });
         res.status(201).json({
             review
@@ -39,7 +40,8 @@ export const deleteReview = async (req, res) => {
 export const updateReview = async (req, res) => {
     try {
         const { id } = req.params;
-        const { review_text, rating, item_id, customer_id } = req.body;
+        const { review_text, rating, item_id } = req.body;
+        const customer_id = req.user.customer_id;
         const review = await Review.findByIdAndUpdate(id, { review_text, rating, item_id, customer_id }, { new: true });
         res.json({
             review
@@ -90,8 +92,8 @@ export const getAllReviews = async (req, res) => {
 
 export const getReviewsByItem = async (req, res) => {
     try {
-        const { item_id } = req.params;
-        const reviews = await Review.find({ item_id: item_id });
+        const { id } = req.params;
+        const reviews = await Review.find({ item_id: id });
         res.json({
             reviews
         });

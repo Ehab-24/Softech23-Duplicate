@@ -76,7 +76,7 @@ const useAuthStore = create((set, get) => ({
     removeFromWishlist: async (item) => {
         try {
             let token = get().token;
-            const response = await axios.delete(`${import.meta.env.VITE_BASE_URI}/wishlist/${item._id}`, {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URI}/wishlist/remove/${item._id}`, {
                 token
             }, {});
             const { customer } = response.data;
@@ -85,6 +85,19 @@ const useAuthStore = create((set, get) => ({
             console.error(error);
         }
     },
+    getAllWishlistItems: async () => {
+        try {
+            let token = get().token;
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URI}/wishlist/getAll`, {
+                headers: {
+                    'x-access-token': token
+                }
+            });
+            return response.data.items; 
+        } catch (error) {
+            
+        }
+    }
 
 }));
 

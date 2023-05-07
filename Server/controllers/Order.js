@@ -4,7 +4,9 @@ import Customer from "../models/Customer.js";
 //Adding order
 export const addOrder = async (req, res) => {
     try {
-        const { order_date, order_status, order_total, order_items, customer_id } = req.body;
+        console.log(req.body);
+        const {  order_status, order_total, order_items , customer_id} = req.body;
+        const order_date = new Date();
         const order = await Order.create({ order_date, order_status, order_total, order_items, customer_id });
         res.status(201).json({
             order

@@ -34,11 +34,14 @@ export default function InventoryItemTile(props) {
       setLoading(false);
     })
   }
-
+// item_title, item_description, item_price, item_cost, item_quantity, inventory_type, item_images, minimum_age 
   return (
     !loading? <div className="w-full h-16 rounded-lg shadow-md flex justify-between items-center bg-gray-50 dark:bg-gray-800 cursor-pointer hover:shadow-lg hover:bg-gray-100 transition-all">
       <section onClick={handleClick} className="w-full py-4 px-4">
-        {item._id}
+        <div className='flex items-center gap-2'>
+        <h2 className='font-semibold text-gray-700'>{item.item_title}</h2>
+        <p className='font-bold text-lg text-slate-600'>{item.item_price}</p>
+        </div>
       </section>
       <button
         onClick={openModal}

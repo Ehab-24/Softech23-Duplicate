@@ -8,6 +8,7 @@ const CustomerSchema = new Schema({
     gender: { type: String, required: true},
     hashedPassword: { type: String, required: true },
     wishlist: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
+    blocked: [{ type: Boolean, default: false }],
 });
 
 

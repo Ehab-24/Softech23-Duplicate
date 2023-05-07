@@ -14,13 +14,34 @@ export default function ItemPage() {
     >
       <Await resolve={item}>
         {({ item }) => (
-          <div>
-            <h1>{item.item_title}</h1>
-            <p>{item.item_price}</p>
-            <p>{item.item_quantity}</p>
-            <p>{item.item_description}</p>
-            <p>{item.minimum_age}</p>
-            <img src={item.item_images[0]} />
+          <div className="flex">
+            <h1 className="text-3xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              {item.item_title}
+            </h1>
+            <div className="w-full md:w-2/3">
+              <img
+                src={item.item_images[0]}
+                className="rounded-lg w-full cover mb-2"
+              />
+              <section className="w-full flex justify-between">
+                <p className="flex gap-1 text-sm items-center">
+                  <p className="text-xl font-semibold text-gray-600 dark:text-gray-400">
+                    {item.item_price}
+                  </p>
+                  pkr
+                </p>
+                <p className="flex gap-1 text-sm">
+                  <p className="font-bold text-gray-600 dark:text-gray-400">
+                    {item.item_quantity}
+                  </p>
+                  <p>Qtn</p>
+                </p>
+              </section>
+            </div>
+            <div>
+              <p>{item.item_description}</p>
+              <p>{item.minimum_age}</p>
+            </div>
           </div>
         )}
       </Await>

@@ -10,10 +10,10 @@ export default function DynamicBreadcrumbs() {
   const breadcrumbs = pathList.map((path, index) => {
     const link = `/${pathList.slice(0, index + 1).join("/")}`;
     const isLast = index === pathList.length - 1;
-    const color = isLast ? "red" : "inherit";
+    const color = isLast ? "pink-red-500" : "";
     return (
       <Link color={color} to={link} key={path}>
-        {isLast ? <span style={{ color: "red" }}>{path}</span> : path}
+        {isLast ? <span className='text-pink-500'>{path}</span> : <span className='text-white'>{path}</span>}
       </Link>
     );
   });
@@ -22,7 +22,7 @@ export default function DynamicBreadcrumbs() {
     <div className={`${pathname.includes("/account/places/") && !pathname.includes("/pick-a-category") ? "px-72" : ""} mt-4`}>
       {pathname!="/" && (
         <Breadcrumbs aria-label="breadcrumb">
-          <Link color="inherit" to={"/"}>
+          <Link className='text-white' to={"/"}>
             Home
           </Link>
           {breadcrumbs}

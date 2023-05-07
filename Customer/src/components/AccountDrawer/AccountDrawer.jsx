@@ -2,18 +2,13 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Icon from './Icon'
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import {FiUser, FiUpload, FiLogOut, FiHelpCircle} from "react-icons/fi"
-import {RiNotification4Line} from "react-icons/ri"
-import axios from 'axios'
-import { Modal } from '@mui/material'
+import {FiLogOut, FiHelpCircle} from "react-icons/fi"
 import useAuthStore from '../../store/useAuth'
+import {AiOutlineHeart} from "react-icons/ai"
 
 const AccountDrawer = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const [open, setOpen] = useState(false);
   const {user, logoutUser} = useAuthStore();
-  
   
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -65,25 +60,10 @@ const AccountDrawer = () => {
             }
             <hr className='mb-2' />
             <Link
-              to="/account"
-              className="block flex items-center gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200"
-            >
-              <FiUser size={17} className='text-pink-500'/>
-              Profile
-            </Link>
-            <button
-                onClick={()=>{setShowPopup(false); setOpen(true); handleMarkAllRead()}}
-                className="block flex items-center bg-white w-full gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200"
-                >
-               <RiNotification4Line size={17} className='text-pink-500'/>
-                My Favourites
-               
-            </button>
-            <Link
-                to="/account/places"
+                to="/wishlist"
                 className="block flex items-center gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200"
                 >
-                <FiUpload size={17} className='text-pink-500'/>
+                <AiOutlineHeart size={17} className='text-pink-500'/>
                 Wishlist
             </Link>
             <a

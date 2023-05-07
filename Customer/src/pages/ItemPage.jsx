@@ -31,7 +31,7 @@ const ItemPage = () => {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/item/${id}`, {}, {})
       setItem(res.data.item);
     } catch (error) {
-      
+
     }
   }
 
@@ -42,7 +42,7 @@ const ItemPage = () => {
     } catch (error) {
       console.log(error);
     }
-  } 
+  }
 
   const handleAddToCart = () => {
     if (item.stock === 0) {
@@ -67,7 +67,16 @@ const ItemPage = () => {
       addToCart(item);
       navigate('/order');
     }
-  }  
+  }
+
+  const deleteReview = async (review_id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_BASE_URI}/review/${review_id}`, {});
+      setReviews(reviews.filter((r) => r._id !== review_id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -105,20 +114,22 @@ const ItemPage = () => {
             </div>
           </div>
         </div>
-        }
-        {
-          reviews.length > 0 && (
-            <div className='mt-8'>
-              <h2 className='text-2xl text-white font-semibold'>Reviews</h2>
-              <div className='flex flex-col gap-4 mt-4 w-80'>
-                {reviews.map((review) => (
-                  <ReviewItem review={review} />
-                ))}
-              </div>
+      }
+      {
+        reviews.length > 0 && (
+          <div className='mt-8'>
+            <h2 className='text-2xl text-white font-semibold'>Reviews</h2>
+            <div className='flex flex-col gap-4 mt-4 w-80'>
+              {reviews.map((review) => (
+                <div key={review._id} onClick={()=>{deleteReview(review._id)}}>
+                  <ReviewItem review={review} deleteReview={deleteReview} />
+                </div>
+              ))}
             </div>
-          )
-        }
-        {item && <Review refresh={fetchReviews} item={item} />}
+          </div>
+        )
+      }
+      {item && user && <Review refresh={fetchReviews} item={item} />}
     </div>
   )
 }

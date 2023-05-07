@@ -6,7 +6,7 @@ export default function OrderTile(props) {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate(`/orders/${order.id}`);
+    navigate(`/orders/${order._id}`);
   }
   
   return (

@@ -1,10 +1,13 @@
 import axios from 'axios';
-import { createInventoryItem, updateInventoryItem } from '../repository/inventory';
+import {
+  createInventoryItem,
+  updateInventoryItem
+} from '../repository/inventory';
 import { useState } from 'react';
 
 export default function InventoryItemForm(props) {
-
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   let item = props.item;
   if (!item) {
@@ -19,15 +22,20 @@ export default function InventoryItemForm(props) {
     };
   }
 
-  function handleFile(event) {
+  async function handleFile(event) {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', 'fvm5pdkc');
     formData.append('cloud_name', 'dq1ho1jvc');
-    axios.post('https://api.cloudinary.com/v1_1/dq1ho1jvc/image/upload', formData).then((response) => {
-      setImages([response.data.secure_url]);
-    });
+
+    setLoading(true);
+    const response = await axios.post(
+      'https://api.cloudinary.com/v1_1/dq1ho1jvc/image/upload',
+      formData
+    );
+    setImages([response.data.secure_url]);
+    setLoading(false);
   }
 
   function handleSubmit(event) {
@@ -40,7 +48,7 @@ export default function InventoryItemForm(props) {
       item_cost,
       item_quantity,
       inventory_type,
-      minimum_age,
+      minimum_age
     } = event.target.elements;
 
     const data = {
@@ -53,7 +61,8 @@ export default function InventoryItemForm(props) {
       minimum_age: minimum_age.value,
       item_images: images
     };
-    props.item ? updateInventoryItem(item): createInventoryItem(data);
+    props.item ? updateInventoryItem(item) : createInventoryItem(data);
+    event.target.reset();
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -125,23 +134,26 @@ export default function InventoryItemForm(props) {
         />
       </label>
 
-      <label htmlFor="item_images" className="mt-8 flex flex-col gap-2">
-        Images
-        <input
-          id="item_images"
-          type="file"
-          accept="image/jpeg image/png image/jpg"
-          onChange={handleFile}
-          multiple
-        />
-      </label>
+      <div className="flex justify-between">
+        <label htmlFor="item_images" className="mt-8 flex flex-col gap-2">
+          Images
+          <input
+            id="item_images"
+            type="file"
+            accept="image/jpeg image/png image/jpg"
+            onChange={handleFile}
+            multiple
+          />
+        </label>
 
-      <button
-        inventory_type="submit"
-        className="w-full md:w-32 mt-4 h-10 text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
-      >
-        {props.item ? 'Save' : 'Create'}
-      </button>
+        <button
+          inventory_type="submit"
+          disabled={loading}
+          className="w-full md:w-32 mt-4 h-10 text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800 disabled:bg-gray-500"
+        >
+          {props.item ? 'Save' : 'Create'}
+        </button>
+      </div>
     </form>
   );
 }

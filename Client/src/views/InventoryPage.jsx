@@ -14,9 +14,9 @@ export default function Inventory() {
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const setInventory = useInventoryStore(state => state.setInventory);
-  const inventory = useInventoryStore(state => state.inventory);
-  
+  const setInventory = useInventoryStore((state) => state.setInventory);
+  const inventory = useInventoryStore((state) => state.inventory);
+
   useEffect(() => {
     setLoading(true);
     getInventoryItems().then((response) => {
@@ -34,20 +34,29 @@ export default function Inventory() {
 
   return (
     <div>
-      <button onClick={openModal} className="w-full md:w-32 mt-4 h-10 text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">
+      <button
+        onClick={openModal}
+        className="w-full md:w-32 mt-4 h-10 text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
+      >
         Add
       </button>
+
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
       >
         <div className="w-full flex justify-end">
-          <button onClick={closeModal} className="grid place-items-center hover:bg-gray-200 dark:hoverbg-gray-800 transition-all rounded-full w-8 h-8">
+          <button
+            onClick={closeModal}
+            className="grid place-items-center hover:bg-gray-200 dark:hoverbg-gray-800 transition-all rounded-full w-8 h-8"
+          >
             <AiOutlineClose />
           </button>
         </div>
-        <InventoryItemForm />
+        <div>
+          <InventoryItemForm />
+        </div>
       </Modal>
 
       <div className="h-8"></div>
@@ -57,7 +66,7 @@ export default function Inventory() {
             <Spinner />
           </div>
         ) : !!inventory ? (
-          <InventoryList inventory={inventory}/>
+          <InventoryList inventory={inventory} />
         ) : (
           <p>Could not load inventory items</p>
         )}

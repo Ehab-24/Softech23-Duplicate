@@ -23,6 +23,7 @@ const routesJSX = (
       />
       <Route path="orders" element={<OrdersPage />} />
       <Route path="customers" element={<CustomersPage />} />
+      <Route path="" element={<InventoryPage />} />
       <Route path="inventory" element={<InventoryPage />} />
       <Route
         path="inventory/:id"

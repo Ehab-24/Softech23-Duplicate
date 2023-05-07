@@ -12,7 +12,7 @@ import useInventoryStore from '../store/inventory';
 export default function InventoryItemTile(props) {
   const item = props.item;
   const navigate = useNavigate();
-  const removeItem = useInventoryStore(state => state.removeItem);
+  const removeItem = useInventoryStore((state) => state.removeItem);
 
   function handleClick() {
     navigate(`/inventory/${item._id}`);
@@ -32,13 +32,24 @@ export default function InventoryItemTile(props) {
     removeItem(item._id);
     deleteInventoryItem(props.item._id).then(() => {
       setLoading(false);
-    })
+    });
   }
-
-  return (
-    !loading? <div className="w-full h-16 rounded-lg shadow-md flex justify-between items-center bg-gray-50 dark:bg-gray-800 cursor-pointer hover:shadow-lg hover:bg-gray-100 transition-all">
-      <section onClick={handleClick} className="w-full py-4 px-4">
-        {item._id}
+  // item_title, item_description, item_price, item_cost, item_quantity, inventory_type, item_images, minimum_age
+  return !loading ? (
+    <div className="w-full h-20 rounded-lg shadow-md flex justify-between items-center bg-gray-50 dark:bg-gray-800 cursor-pointer hover:shadow-lg hover:bg-gray-100 transition-all">
+      <section onClick={handleClick} className="w-full py-4 px-4 flex flex-col">
+        <div className="flex items-center gap-2">
+          <div className='w-28 flex items-center gap-1'>
+            <p className="font-bold text-lg text-pink-900">
+              {item.item_price}
+            </p>
+            <p className='text-sm text-pink-900'>pkr</p>
+          </div>
+          <h2 className="font-semibold text-gray-700">{item.item_title}</h2>
+        </div>
+        <p className='text-gray-600 text-sm italic mt-2 overflow-ellipsis'>
+          {item.item_description}
+        </p>
       </section>
       <button
         onClick={openModal}
@@ -47,7 +58,10 @@ export default function InventoryItemTile(props) {
         <MdOutlineModeEdit />
       </button>
       <div className="flex gap-4">
-        <button onClick={deleteItem} className="grid place-items-center hover:bg-gray-200 dark:hoverbg-gray-800 transition-all rounded-full w-8 h-8">
+        <button
+          onClick={deleteItem}
+          className="grid place-items-center hover:bg-gray-200 dark:hoverbg-gray-800 transition-all rounded-full w-8 h-8"
+        >
           <MdDelete />
         </button>
       </div>
@@ -67,5 +81,9 @@ export default function InventoryItemTile(props) {
         <InventoryItemForm item={item} />
       </Modal>
     </div>
-  : <div className='w-full grid place-items-center'><Spinner /></div>);
+  ) : (
+    <div className="w-full grid place-items-center">
+      <Spinner />
+    </div>
+  );
 }

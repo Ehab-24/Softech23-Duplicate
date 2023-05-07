@@ -53,3 +53,33 @@ export async function deleteOrder(order) {
     return null;
   }
 }
+
+export async function getOrderByCustomerName(name) {
+  try {
+    const response = await appAPI.get('/order/name', {params: {name}});
+    return response.data;
+  }
+  catch (error) {
+    return null;
+  }
+}
+
+export async function getOrderByCustomerEmail(email) {
+  try {
+    const response = await appAPI.get('/order/email', {params: {email}});
+    return response.data;
+  }
+  catch (error) {
+    return null;
+  }
+}
+
+export async function getOrderByCustomerDate(date) {
+  try {
+    const response = await appAPI.get('/order/date', {params: {date}});
+    return response.data;
+  }
+  catch (error) {
+    return null;
+  }
+}

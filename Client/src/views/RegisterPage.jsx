@@ -81,9 +81,9 @@ export default function RegisterPage() {
                 Create an account
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Already have an account?
+                Already have an account? 
                 <button className="font-medium text-pink-600 hover:underline dark:text-pink-500">
-                  <Link to="/auth/login">Login here</Link>
+                  <Link to="/auth/login"> Login here</Link>
                 </button>
               </p>
             </form>

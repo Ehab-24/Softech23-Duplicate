@@ -5,16 +5,9 @@ import axios from 'axios';
 
 const SearchBar = () => {
   const [input, setInput] = useState('');
-  const [search, setSearch] = useState([]);
+
   const navigate = useNavigate();
 
-  const handleSearch = async (input) => {
-    setTimeout(async () => {
-      const response = await axios.get(`https://localhost:4000/item/title/${input}`);
-      setSearch(response.data.results);
-    }, 500);
-  };
-  
   const handleClick = (e) => {
     e.preventDefault();
     if(!input){
@@ -25,10 +18,10 @@ const SearchBar = () => {
 };
 
   return (
-    <form className="flex w-full max-w-2xl bg-white border border-gray-300 rounded-full items-center">
+    <form className="flex w-full max-w-2xl bg-pink-800 text-white border border-gray-300 rounded-full items-center">
   <input
     type="text"
-    className="w-full px-6 py-2 text-gray-800 border-none rounded-full focus:outline-none"
+    className="w-full bg-transparent placeholder:text-gray-300 caret-pink-500 text-white px-6 py-2 text-gray-800 border-none rounded-full focus:outline-none"
     placeholder="Fortnite, Minecraft, etc."
     value={input}
     onChange={(e) => {

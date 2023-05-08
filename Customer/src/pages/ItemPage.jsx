@@ -79,11 +79,11 @@ const ItemPage = () => {
   };
 
   return (
-    <div>
+    <div className='px-3'>
       <Toaster />
       <LoginPage open={open} setOpen={setOpen} />
       {item &&
-        <div className='mt-8 flex pt-6'>
+        <div className='mt-8 flex md:flex-row flex-col pt-6'>
           <div className='flex flex-col gap-4'>
             <h2 className='text-4xl text-white font-semibold'>{item.item_title}</h2>
             <div className='flex items-center'>

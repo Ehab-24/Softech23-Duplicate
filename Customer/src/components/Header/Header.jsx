@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar.jsx";
 import LoginPage from "../../pages/LoginPage.jsx";
 import { useState } from "react";
-import {BsCartFill} from "react-icons/bs"
-import {RiPixelfedLine} from "react-icons/ri"
+import { BsCartFill } from "react-icons/bs"
+import { RiPixelfedLine } from "react-icons/ri"
 import useCartStore from "../../store/useCart.js";
 import useAuthStore from "../../store/useAuth.js";
 import AccountDrawer from "../AccountDrawer/AccountDrawer.jsx";
 
 export default function Header() {
-  const {cart} = useCartStore();
-  const {user} = useAuthStore();
+  const { cart } = useCartStore();
+  const { user } = useAuthStore();
   const [open, setOpen] = useState(false);
   return (
 
@@ -29,10 +29,11 @@ export default function Header() {
                 to={"/order"}
                 className="sm:flex hidden relative flex-col items-center"
               >
-                {cart?.length > 0 && 
-                  <h2 className="text-white font-bold absolute bottom-3 right-0">
-                    {cart.length}
-                  </h2>
+                {cart?.length > 0 &&
+                    <span className="text-white bg-pink-700 h-5 w-5 items-center justify-center flex rounded-full text-sm font-bold absolute bottom-4 left-4">
+                      <p>{cart.length}</p>
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
+                    </span>
                 }
                 <BsCartFill size={30} className="text-pink-500" />
               </Link>

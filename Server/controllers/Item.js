@@ -30,26 +30,26 @@ export const deleteItem = async (req, res) => {
         res.status(400).json({
             status: 'fail',
             message: error.message
-        });   
+        });
     }
 }
 
 //Getting item by id
 
 export const getItemById = async (req, res) => {
-        try {
-            const { id } = req.params;
-            const item = await Item.findById(id);
+    try {
+        const { id } = req.params;
+        const item = await Item.findById(id);
 
-            res.json({
-                item
-            });
-        } catch (error) {
-            res.status(400).json({
-                status: 'fail',
-                message: error.message
-            });
-        }
+        res.json({
+            item
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: 'fail',
+            message: error.message
+        });
+    }
 }
 
 //Getting all items
@@ -107,10 +107,18 @@ export const getItemByInventoryType = async (req, res) => {
 
 export const getItemByTitle = async (req, res) => {
     try {
-        const { item_title } = req.body;
-        const item = await Item.find({ item_title });
+        const searchQuery = req.query.search;
+
+        const query = {
+            $or: [
+                { item_title: { $regex: searchQuery, $options: "i" } },
+                { item_description: { $regex: searchQuery, $options: "i" } }
+            ]
+        };
+
+        const items = await Item.find(query);
         res.json({
-            item
+            items
         });
     } catch (error) {
         res.status(400).json({

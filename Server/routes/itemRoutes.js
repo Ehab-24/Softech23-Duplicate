@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/", addItem);
 router.get("/", getAllItems);
 router.post("/type", getItemByInventoryType);
-router.get("/title/:title", getItemByTitle);
+router.get("/title", getItemByTitle);
 router.get("/:id", getItemById);
 router.delete("/:id", deleteItem);
 router.patch("/:id", updateItem);

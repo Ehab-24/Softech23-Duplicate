@@ -19,7 +19,7 @@ export default function DynamicBreadcrumbs() {
   });
 
   return (
-    <div className={`${pathname.includes("/account/places/") && !pathname.includes("/pick-a-category") ? "px-72" : ""} mt-4`}>
+    <div className={`${pathname.includes("/account/places/") && !pathname.includes("/pick-a-category") ? "px-72" : ""} mt-4 md:flex hidden`}>
       {pathname!="/" && (
         <Breadcrumbs aria-label="breadcrumb">
           <Link className='text-white' to={"/"}>

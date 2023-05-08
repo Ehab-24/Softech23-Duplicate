@@ -31,7 +31,7 @@ const Review = ({item, refresh}) => {
     };
 
     return (
-        <div className='mt-8'>
+        <div className='mt-8 px-3'>
             <Toaster />
             <div>
                 <label className='text-2xl text-white'>Rating:</label>

@@ -1,0 +1,28 @@
+# Node.js related files
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+
+# macOS related files
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Visual Studio Code related files
+.vscode/
+
+# Other commonly ignored files
+*.log
+*.swp
+*.bak
+*.cache
+*.pyc
+*.class
+*.DS_Store

@@ -1,5 +1,5 @@
 {
-    "name": "server",
+    "name": "pixelpalace",
     "version": "1.0.0",
     "description": "AntsqAI Server",
     "main": "index.js",

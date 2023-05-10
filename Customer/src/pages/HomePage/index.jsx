@@ -3,7 +3,6 @@ import LoginPage from '../LoginPage';
 import { toast, Toaster } from 'react-hot-toast';
 import InventoryList from './InventoryList';
 import useAuthStore from '../../store/useAuth';
-import Bot from "../../components/Bot/Bot"
 import { useLocation } from 'react-router-dom';
 import { FaRobot } from 'react-icons/fa';
 import CategoryItem from '../../components/CategoryItem';
@@ -50,13 +49,6 @@ const HomePage = () => {
   return (
     <div>
       <Toaster />
-      <div className='absolute md:flex hidden z-40 right-20 bottom-0'>
-        {openBot && <Bot />}
-        <div style={{ position: 'absolute', bottom: "540px", marginRight: "80px", right: '10px', cursor: 'pointer' }} onClick={() => setOpenBot(!openBot)}>
-          <FaRobot size={30} className='text-pink-500' />
-        </div>
-      </div>
-
       <LoginPage open={open} setOpen={setOpen} />
       {
         items.length > 0 && (

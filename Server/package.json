@@ -31,8 +31,7 @@
     },
     "scripts": {
         "start": "node index.js",
-        "dev": "nodemon index.js",
-        "heroku-prebuild": "npm install"
+        "dev": "nodemon index.js"
     },
     "type": "module"
 }

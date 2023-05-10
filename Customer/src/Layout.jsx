@@ -4,7 +4,6 @@ import Header from "./components/Header/Header"
 import Footer from './components/Footer/Footer'
 import Updates from './components/Updates'
 import DynamicBreadcrumbs from './components/BreadCrumbs/DynamicBreadCrumbs'
-import Bot from './components/Bot/Bot'
 
 const Layout = () => {
   return (

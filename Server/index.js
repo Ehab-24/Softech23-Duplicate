@@ -3,11 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import passport from "passport";
-import User from "./models/user.js";
 import bodyParser from "body-parser";
-import session from "express-session";
-import "./passport.js"
 
 import inventoryRoutes from "./routes/inventoryRoutes.js";
 import itemRoutes from "./routes/itemRoutes.js";
@@ -15,7 +11,6 @@ import orderRoutes from "./routes/orderRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import authRoutes from "./routes/authRoutes.js"; 
 import wishlistRoutes from "./routes/wishlistRoutes.js";
-import botRoutes from "./routes/botRoutes.js"
 
 dotenv.config();
 
@@ -30,34 +25,9 @@ app.use("/subs/webhook", bodyParser.raw({ type: "*/*" }));
 
 app.use(express.urlencoded({ extended: false }));
 
-// app.set('trust proxy', 1);
-
-app.use(
-  session({
-    secret: "MySecretKey",
-    resave: true,
-    saveUninitialized: true,
-  })
-)
+app.set('trust proxy', 1);
 
 app.use(cookieParser());
-
-// Setup Passport
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-//Serializing and Deserializing
-
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
-
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, doc) => {
-      done(null, doc);
-  });
-});
 
 //MongoDB connection
 
@@ -92,7 +62,6 @@ app.use("/order", orderRoutes);
 app.use("/review", reviewRoutes);
 app.use("/auth", authRoutes);
 app.use("/wishlist", wishlistRoutes);
-app.use("/bot", botRoutes);
 
 //Server routes
 
